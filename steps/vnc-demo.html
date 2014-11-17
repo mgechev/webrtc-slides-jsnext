@@ -1,0 +1,66 @@
+<div class="ipad-frame">
+  <div class="screen-wrapper">
+    <div class="ipad-screen" id="ipad-screen">
+      <div class="icon windows-icon" data-iframe-id="windows-app">
+      </div>
+      <div class="icon linux-icon" data-iframe-id="linux-app">
+      </div>
+    </div>
+    <iframe id="windows-app"
+       src="http://central.ny7.me:5906/learnly-0.9.2/client.xhtml?id=c%2Fvm3#enabled">
+    </iframe>
+    <iframe id="linux-app"
+      src="http://192.168.0.108:8080/learnly-0.9.2/client.xhtml?id=c%2Fvm1#enabled">
+    </iframe>
+  </div>
+  <div class="home-button"></div>
+</div>
+<script>
+$(function () {
+
+  function openApp(screen, icon) {
+    if (activeIframe) return;
+    var iconCoordinates = {
+          left: parseInt(icon.css('left')),
+          top: parseInt(icon.css('top'))
+        },
+        x = iconCoordinates.left + icon.width() / 2,
+        y = iconCoordinates.top + icon.height() / 2,
+        origin = x + 'px ' + y + 'px';
+    screen.css({
+      '-webkit-transform-origin': origin,
+      '-moz-transform-origin': origin,
+      'transform-origin': origin
+    });
+    screen.addClass('app-open');
+    launchApp(icon.data('iframe-id'));
+  }
+
+  function launchApp(id) {
+    activeIframe = $('#' + id);
+    activeIframe.addClass('active-iframe');
+    activeIframe.focus();
+  }
+
+  function goHome(screen) {
+    if (!activeIframe) return;
+    activeIframe.blur();
+    activeIframe.removeClass('active-iframe');
+    screen.removeClass('app-open');
+    activeIframe = null;
+  }
+
+  var screen = $('#ipad-screen'),
+      activeIframe;
+
+  $('iframe').load(function () {
+    $('.icon').click(function () {
+      openApp(screen, $(this));
+    });
+    $('.home-button').click(function () {
+      goHome(screen);
+    });
+  });
+});
+</script>
+

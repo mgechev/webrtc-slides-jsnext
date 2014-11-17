@@ -1,0 +1,64 @@
+<div class="code-wrapper">
+  <h3>Server:</h3>
+  <pre>
+  <code lang="JavaScript">
+  var WebSocketServer = require('ws').Server,
+      wss = new WebSocketServer({ port: 55555 });
+  wss.on('connection', function (ws) {
+    ws.on('message', function (message) {
+      ws.send(message);
+    });
+  });
+  </pre>
+  </code>
+
+  <h3>Client:</h3>
+  <pre>
+  <code lang="JavaScript">
+  var ws = new WebSocket('ws://localhost:55555'),
+      output = document.getElementById('output-div'),
+      messageInput = document.getElementById('message-input');
+  function addMessage(content) {
+    output.innerHTML += '&lt;br&gt;' + message;
+  }
+  ws.onopen = function () {
+    addMessage('Connection opened');
+  };
+  ws.onmessage = function (e) {
+    addMessage('Server: ' + e.data);
+  };
+  document.getElementById('send-btn').addEventListener('click',
+  function () {
+    ws.send(messageInput.value);
+    messageInput.value = '';
+  });
+  </code>
+  </pre>
+</div>
+<div style="line-height: 10px;">
+  <input type="text" id="message-input">
+  <input type="button" id="send-btn" value="Send">
+  <div id="output-div">
+  </div>
+</div>
+<script>
+(function () {
+  var ws = new WebSocket('ws://localhost:55555'),
+      output = document.getElementById('output-div'),
+      messageInput = document.getElementById('message-input');
+  function addMessage(content) {
+    console.log(content);
+    output.innerHTML += '<br>' + content;
+  }
+  ws.onopen = function () {
+    addMessage('Connection opened');
+  };
+  ws.onmessage = function (e) {
+    addMessage('Server: ' + e.data);
+  };
+  document.getElementById('send-btn').addEventListener('click', function () {
+    ws.send(messageInput.value);
+    messageInput.value = '';
+  });
+}());
+</script>

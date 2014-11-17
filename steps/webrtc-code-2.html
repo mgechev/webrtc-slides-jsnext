@@ -1,0 +1,28 @@
+<div class="code-wrapper">
+  <pre>
+  <code lang="JavaScript">
+  // Getting audio and video streams
+  navigator.getUserMedia({ video: true, audio: true }, function (stream) {
+    localObjectUrl = URL.createObjectURL(stream);
+    localVideo.src = localObjectUrl;
+    peerConnection.addStream(stream);
+    cameraEnabled = true;
+    if (clientConnected)
+      makeOffer();
+  }, function () {
+    console.log('error');
+  });
+
+  // Make offer by sending initial SDP and ice candidates to the other peer
+  // via the server
+  function makeOffer() {
+    offered = true;
+    peerConnection.createOffer(function (sdp) {
+      peerConnection.setLocalDescription(sdp);
+      socket.emit('msg', { room: roomId, sdp: sdp, type: 'sdp-offer' });
+    }, null,
+    {'mandatory': { 'OfferToReceiveVideo': true, 'OfferToReceiveAudio': true }});
+  }
+  </code>
+  </pre>
+</div>

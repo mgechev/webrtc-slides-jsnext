@@ -1,0 +1,33 @@
+<div class="code-wrapper">
+  <h3>Server:</h3>
+  <pre>
+  <code lang="JavaScript">
+socketio.listen(server, { log: false })
+  .sockets.on('connection', function (socket) {
+
+    var socketRoom;
+    socket.on('init', function (data) {
+      socketRoom = data.room;
+      var room = rooms[socketRoom];
+      if (!room) rooms[socketRoom] = [socket];
+      else {
+        room.push(socket);
+        if (room.length &gt; 2) room.shift();
+        room[0].emit('peer.connected');
+      }
+    });
+
+    socket.on('msg', function (data) {
+      var room = socketRoom,
+          target = (socket === rooms[room][0]) ? rooms[room][1] : rooms[room][0];
+      target.emit('msg', data)
+      rooms[room].forEach(function () {
+        socket.emit('peer.connected');
+      })
+    });
+
+});
+
+  </code>
+  </pre>
+</div>

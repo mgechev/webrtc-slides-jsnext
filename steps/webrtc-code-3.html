@@ -1,0 +1,25 @@
+<div class="code-wrapper">
+  <pre>
+  <code lang="JavaScript">
+  // Handle messages by the other peer, proxied through the server
+  function handleMessage(data) {
+    switch (data.type) {
+      case 'sdp-offer':
+      peerConnection.setRemoteDescription(new RTCSessionDescription(data.sdp));
+      peerConnection.createAnswer(function (sdp) {
+        peerConnection.setLocalDescription(sdp);
+        socket.emit('msg', { room: roomId, sdp: sdp, type: 'sdp-answer' });
+      });
+      break;
+      case 'sdp-answer':
+      peerConnection.setRemoteDescription(new RTCSessionDescription(data.sdp));
+      break;
+      case 'ice':
+      if (data.ice)
+        peerConnection.addIceCandidate(new RTCIceCandidate(data.ice));
+      break;
+    }
+  }
+  </code>
+  </pre>
+</div>

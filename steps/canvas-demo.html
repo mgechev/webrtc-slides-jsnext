@@ -1,0 +1,93 @@
+<pre style="font-size: 0.30em; float: left; margin-right: 20px;">
+<code lang="JavaScript">
+var canvas = document.getElementById('canvas'),
+    ctx = canvas.getContext('2d'),
+    cc = 'black', mD = false,
+    btns = document.querySelectorAll('button');
+
+[].slice.call(btns).forEach(function (b) {
+  btn.addEventListener('click', function () { 
+    cc = b.getAttribute('data-color');
+  });
+});
+
+canvas.addEventListener('mousedown', function () {
+  mD = true; });
+canvas.addEventListener('mouseup', function () {
+  mD = false; });
+
+canvas.addEventListener('mousemove', function (e) {
+  if (!mD) return;
+  var rect = canvas.getBoundingClientRect();
+  ctx.beginPath();
+  ctx.arc(e.pageX - rect.left, e.pageY - rect.top,
+     3, 0, 2 * Math.PI, false);
+  ctx.fillStyle = cc; ctx.fill();
+});
+</code>
+</pre>
+<canvas id="cnv-demo" height="400"></canvas>
+<br>
+<button data-color="black"></button>
+<button data-color="red"></button>
+<button data-color="purple"></button>
+<button data-color="yellow"></button>
+<button data-color="blue"></button>
+<style>
+[data-color] {
+  border: 1px solid black;
+  width: 20px;
+  height: 20px;
+  outline: none;
+  cursor: pointer;
+}
+
+[data-color='black'] {
+  background-color: black;
+}
+
+[data-color='red'] {
+  background-color: red;
+}
+
+[data-color='purple'] {
+  background-color: purple;
+}
+
+[data-color='yellow'] {
+  background-color: yellow;
+}
+
+[data-color='blue'] {
+  background-color: blue;
+}
+#cnv-demo {
+  background-color: white;
+}
+</style>
+<script>
+(function () {
+  var canvas = document.getElementById('cnv-demo'),
+      ctx = canvas.getContext('2d'),
+      cc = 'black', mD = false,
+      btns = document.querySelectorAll('button');
+
+  [].slice.call(btns).forEach(function (b) {
+    b.addEventListener('click', function () { 
+      cc = b.getAttribute('data-color');
+    });
+  });
+
+  canvas.addEventListener('mousedown', function () { mD = true; });
+  canvas.addEventListener('mouseup', function () { mD = false; });
+
+  canvas.addEventListener('mousemove', function (e) {
+    if (!mD) return;
+    var rect = canvas.getBoundingClientRect();
+    ctx.beginPath();
+    ctx.arc(e.pageX - rect.left, e.pageY - rect.top, 3, 0, 2 * Math.PI, false);
+    ctx.fillStyle = cc;
+    ctx.fill();
+  });
+}());
+</script>

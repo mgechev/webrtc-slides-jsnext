@@ -1,0 +1,192 @@
+/**
+ * Every step element has one of three classes: `future`, `present` and `past`.
+ * Only one current step has the `present` class.
+ * When a step is shown (selected) its element gets the class of "active" and 
+ * the body element gets the class `impress-on-ID` where ID is the step's id.
+ */
+
+.step h2 {
+    font-size: 78px;
+    font-weight: bold;
+}
+
+ul {
+  margin-left: 40px;
+}
+
+li {
+  list-style-type: circle;
+}
+
+img {
+  display: block;
+  margin: auto;
+}
+
+.impress-on-seriously {
+  background: black;
+}
+
+.impress-on-bazinga {
+  background: #EA2423;
+}
+
+.impress-on-and-come-on {
+  background: black;
+  color: white;
+}
+
+.impress-on-sticks {
+  background: black;
+}
+
+/* VNC demo */
+
+.ipad-frame {
+  background-image: url(/images/ipad-frame.png);
+  background-size: 802px 539px;
+  width: 802px;
+  height: 539px;
+  display: inline-block;
+  position: relative;
+}
+
+.home-button {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 250px;
+  right: 23px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.screen-wrapper {
+  margin-top: 30px;
+  margin-left: 75px;
+  width: 641px;
+  height: 479px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.screen-wrapper iframe {
+  position: absolute;
+  opacity: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: 0.5s opacity;
+  -moz-transition: 0.5s opacity;
+  transition: 0.5s opacity;
+}
+
+.active-iframe {
+  opacity: 1 !important;
+  z-index: 3 !important;
+}
+
+.ipad-screen {
+  background-image: url(/images/ipad-screen.png);
+  background-size: 641px 479px;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: 0.7s -webkit-transform;
+  -moz-transition: 0.7s -moz-transform;
+  transition: 0.7s transform;
+}
+
+.icon {
+  position: absolute;
+  background-size: 57px 57px;
+  width: 57px;
+  height: 57px;
+  cursor: pointer;
+
+}
+
+.icon:after {
+  font-family: verdana;
+  color: #fff;
+  font-size: 8px;
+  position: absolute;
+  top: 57px;
+}
+
+.windows-icon {
+  background-image: url(/images/windows-icon.png);
+  top: 300px;
+  left: 169px;
+}
+
+.windows-icon:after {
+  content: 'Windows';
+  left: 10px;
+  top: 57px;
+}
+
+.linux-icon {
+  background-image: url(/images/linux-icon.png);
+  top: 300px;
+  left: 292px;
+}
+
+.linux-icon:after {
+  content: 'Linux';
+  left: 17px;
+}
+
+.app-open {
+  transform: scale(11);
+}
+
+iframe {
+  border: none;
+}
+
+code {
+  font-family: consolas;
+}
+
+#message-input {
+  border: 1px solid grey;
+  font-size: 0.5em;
+  outline: none;
+  margin-top: 60px;
+}
+
+#send-btn {
+  font-size: 0.5em;
+}
+
+#output-div {
+  font-family: consolas;
+  font-size: 0.5em;
+  line-height: 1.2em;
+}
+
+.code-wrapper {
+  float: left;
+  font-size: 0.3em;
+  margin-right: 20px;"
+}
+
+.code-wrapper h3 {
+  font-size: 1.5em;
+  font-weight: bold;
+  line-height: 1em;
+  margin-top: 20px;
+}
+
+.code-wrapper pre {
+  margin-bottom: 20px;
+}
+
+body {
+  background-image: url(/images/js-next.png);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: 15%;
+}
