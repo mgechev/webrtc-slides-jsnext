@@ -15,9 +15,12 @@ After that you can clone the repo with the slides and run the grunt server task:
 git clone git@github.com:mgechev/webrtc-slides-jsnext.git
 cd webrtc-slides-jsnext
 npm install
+# npm install -g grunt # if you don't have it already installed.
 bower install
 grunt server
 ```
+
+Note that you might need to run the `npm install` command with `sudo`.
 
 ## The demo with the VMs in the iPad won't work.
 ## The websockets demo won't work.
